@@ -77,27 +77,27 @@ const countriesReducer = ( state = [], action ) => {
 }
 
 //action for single country
-const SET_COUNTRY = 'SET_COUNTRY'
+const SET_SINGLE_COUNTRY = 'SET_SINGLE_COUNTRY'
 
-const _setCountry = (country) => {
+const _setSingleCountry = (country) => {
 	return {
-		type: SET_COUNTRY,
+		type: SET_SINGLE_COUNTRY,
 		country
 	}
 }
 
 //thunk creator for country
-const setCountry = () => {
+const setSingleCountry = () => {
 	return async(dispatch) => {
 		const country = (await axios.get('/api/country')).data
-		dispatch(_setCountry(country))
+		dispatch(_setSingleCountry(country))
 	}
 }
 
 
 //single country reducer
 const countryReducer = (state = {}, action) => {
-	if(action.type === SET_COUNTRY) {
+	if(action.type === SET_SINGLE_COUNTRY) {
 		state = action.country
 	}
 	return state 
@@ -113,6 +113,6 @@ const reducer = combineReducers({
 //create store
 const store = createStore(reducer, applyMiddleware(thunk, loggingMiddleware))
 
-export {setCountries, createCountries, ruinCountry, updateCountry, setCountry} 
+export {setCountries, createCountries, ruinCountry, updateCountry, setSingleCountry} 
 
 export default store
