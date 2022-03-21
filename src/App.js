@@ -10,11 +10,9 @@ import { HashRouter as Router, Route } from 'react-router-dom'
 class App extends Component {
 	componentDidMount(){
 		this.props.loadCountries()	
-console.log(this.props)
 	}
 	render() {
 		const { countries } = this.props
-console.log('app',this.props)
 		return (
 			<Router>
 				<div>
@@ -31,7 +29,6 @@ console.log('app',this.props)
 
 
 const mapStateToProps = (state) => {
-console.log('app state', state)
 	return state
 }
 
