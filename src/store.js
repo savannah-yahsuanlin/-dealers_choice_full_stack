@@ -70,7 +70,7 @@ const countriesReducer = ( state = [], action ) => {
 		state = state.filter(country => country.id !== action.country.id)
 	}
 
-	if(action === UPDATE_COUNTRY) {
+	if(action.type === UPDATE_COUNTRY) {
 		state = state.map(country => country.id === action.country.id ? action.country: country)
 	}
 
