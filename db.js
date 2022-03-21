@@ -13,8 +13,7 @@ const Countries = db.define('country', {
 		}
 	},
 	population: {
-		type: STRING,
-		allowNull: false
+		type: STRING
 	},
 	note: {
 		type: STRING

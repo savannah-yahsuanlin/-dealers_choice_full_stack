@@ -11,10 +11,17 @@ const UPDATE_COUNTRY = 'UPDATE_COUNTRY'
 const RUIN_COUNTRY = 'RUIN_COUNTRY'
 
 //action creator
-const _setCountries = (countries) => {
+const _setCountries = () => {
 	return {
 		type: SET_COUNTRIES,
 		countries
+	}
+}
+
+const _updateCountry = (country) => {
+	return {
+		type: UPDATE_COUNTRY,
+		country
 	}
 }
 
@@ -40,8 +47,17 @@ const ruinCountry = (country) => {
 	}
 }
 
+const updateCountry = (country) => {
+	return async(dispatch) => {
+		const updated = (await axios.put(`/api/countries/${country.id}`, country)).data
+		console.log(updated)
+		dispatch(_updateCountry(updated))
+	}
+}
+
 //reducer
 const countriesReducer = ( state = [], action ) => {
+
 	if(action.type === SET_COUNTRIES) {
 		state = action.countries
 	}
@@ -52,6 +68,10 @@ const countriesReducer = ( state = [], action ) => {
 
 	if(action.type === RUIN_COUNTRY) {
 		state = state.filter(country => country.id !== action.country.id)
+	}
+
+	if(action === UPDATE_COUNTRY) {
+		state = state.map(country => country.id === action.country.id ? action.country: country)
 	}
 
 	return state
@@ -66,6 +86,6 @@ const reducer = combineReducers({
 
 const store = createStore(reducer, applyMiddleware(thunk, loggingMiddleware))
 
-export {setCountries, createCountries, ruinCountry} 
+export {setCountries, createCountries, ruinCountry, updateCountry} 
 
 export default store

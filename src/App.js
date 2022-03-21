@@ -4,15 +4,17 @@ import { setCountries} from './store'
 import Countries from './Countries'
 import Country from './Country'
 import CreateNewCountry from './CreateNewCountry'
-import {HashRouter as Router, Route} from 'react-router-dom'
+import { HashRouter as Router, Route } from 'react-router-dom'
 
 
 class App extends Component {
 	componentDidMount(){
 		this.props.loadCountries()	
+console.log(this.props)
 	}
 	render() {
 		const { countries } = this.props
+console.log('app',this.props)
 		return (
 			<Router>
 				<div>
@@ -29,6 +31,7 @@ class App extends Component {
 
 
 const mapStateToProps = (state) => {
+console.log('app state', state)
 	return state
 }
 
@@ -36,6 +39,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		loadCountries: () => dispatch(setCountries())
 	}
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

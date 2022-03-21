@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { ruinCountry} from './store'
+import { ruinCountry } from './store'
 import { Link } from 'react-router-dom'
 
 const Countries = ({ countries, deleteCountry }) => {

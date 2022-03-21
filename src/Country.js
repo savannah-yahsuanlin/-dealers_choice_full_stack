@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 
 const Country = (props) => {
 	const country = props.countries.find(country => country.id === props.match.params.id*1)
-console.log(country)
 	return (
 		<div>
 			<hr/>
@@ -14,10 +13,7 @@ console.log(country)
 	)
 }
 
- 
-const mapStateToProps = (state) => {
-console.log('state', state)
-	return state
-}
+console.log('hello')
 
-export default connect(mapStateToProps)(Country)
+
+export default connect(state=>state)(Country)

@@ -11,6 +11,17 @@ app.get('/', (req, res)=> res.sendFile(path.join(__dirname, 'index.html')));
 
 //Countries
 
+app.put('/api/countries/:id', async(req, res, next) => {
+	try {
+		const country = await Countries.findByPk(req.params.id)
+		await country.update(req.body)
+		res.status(202).send(country)
+	} catch (error) {
+		next(error)
+	}
+})
+
+
 app.get('/api/countries', async(req, res, next) => {
 	try {
 		res.send(await Countries.findAll())
@@ -38,13 +49,8 @@ app.post('/api/countries', async(req, res, next) => {
 	}
 })
 
-app.put('/api/countries/:id', async(req, res, next) => {
-	try {
-		const country = await Countries.findByPk(req.params.id)
-		res.status(202).send(await country.update(req.body))
-	} catch (error) {
-		next(error)
-	}
+app.use((err, req, res, next) => {
+	res.status(500).send({error: err})
 })
 
 
