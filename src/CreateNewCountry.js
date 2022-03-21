@@ -26,14 +26,16 @@ class CreateNewCountry extends Component {
 
 
 	render() {
-		const { name } = this.state
+		const { name, population } = this.state
 		const {  handleSubmit, handleChange } = this
 		return (
-			<form onSubmit={ handleSubmit }>
-				<input name='name' value={name} placeholder='country name' onChange = { handleChange } />
-				<input name='population' value={population} placeholder='population' onChange={handChange}/>
- 				<button className='save'> Save </button>
-			</form>
+			<div>
+				<form onSubmit={ handleSubmit }>
+					<input name='name' value={name} placeholder='country name' onChange = { handleChange } />
+					<input name='population' value={population} placeholder='population' onChange={ handleChange }/>
+					{!name ||!population ? <button className='save' disabled> Save </button> : <button className='save'> Save </button>}
+				</form>
+			</div>
 		)
 	}
 }

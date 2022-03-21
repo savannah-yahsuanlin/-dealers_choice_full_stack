@@ -13,5 +13,8 @@ const Country = (props) => {
     )
 }
 
+const mapStateToProps = (state) => {
+    return state
+} 
 
-export default connect(state=>state)(Country)
+export default connect(mapStateToProps)(Country)

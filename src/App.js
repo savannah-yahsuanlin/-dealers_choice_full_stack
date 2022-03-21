@@ -1,41 +1,45 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setCountries} from './store'
+import { setCountries } from './store'
 import Countries from './Countries'
 import Country from './Country'
+import Nav from './Nav'
 import CreateNewCountry from './CreateNewCountry'
-import { HashRouter as Router, Route } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 
 
 class App extends Component {
-	componentDidMount(){
-		this.props.loadCountries()	
-	}
-	render() {
-		const { countries } = this.props
-		return (
-			<Router>
-				<div>
-					<h1>Full Stack Country Wiki</h1>
-					<p>Help us add more data</p>
-					<CreateNewCountry/>
-					<Countries countries = { countries }/>
-					<Route path='/countries/:id' component={Country} />
-				</div>
-			</Router>
-		)
-	}
+    componentDidMount(){
+        this.props.loadCountries()	
+    }
+    render() {
+        const { countries } = this.props
+        return (
+            <Router>
+                <div>
+                    <h1>Full Stack Country Wiki</h1>
+                    <p>Help us add more data</p>    
+                    <Route path='/' component={Nav}/>
+                    <hr/>
+                    <Switch>
+                        <Route path='/countries/create' component={CreateNewCountry}/>
+                        <Route path='/countries' component={Countries}/>
+                    </Switch>
+                </div>
+            </Router>
+        )
+    }
 }
 
 
 const mapStateToProps = (state) => {
-	return state
+    return state
 }
 
 const mapDispatchToProps = (dispatch) => {
-	return {
-		loadCountries: () => dispatch(setCountries())
-	}
+    return {
+        loadCountries: () => dispatch(setCountries())
+    }
 
 }
 

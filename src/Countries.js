@@ -10,8 +10,12 @@ const Countries = ({ countries, deleteCountry }) => {
             {
                 countries.map(country => {
                     return (		
-                        <div>
-                            <Link to={`/countries/${country.id}`}><li key={country.id}>{country.name}</li></Link>
+                        <div key={country.id}>
+                            <Link to={`/countries/${country.id}`}>
+                                <li key={country.id}>
+                                   Country: {country.name} <br/>
+                                </li>
+                            </Link>
                             <button onClick={ () => deleteCountry(country) }>X</button>
                         </div>
                     )
@@ -22,10 +26,14 @@ const Countries = ({ countries, deleteCountry }) => {
     )
 }
 
+const mapStateToProps = (state) => {
+    return state
+}
+ 
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteCountry: (country) => {dispatch(ruinCountry(country))}
     }
 }
 
-export default connect(null, mapDispatchToProps)(Countries)
+export default connect(mapStateToProps, mapDispatchToProps)(Countries)
