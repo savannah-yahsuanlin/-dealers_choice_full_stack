@@ -13,7 +13,5 @@ const Country = (props) => {
 	)
 }
 
-console.log('hello')
-
 
 export default connect(state=>state)(Country)
