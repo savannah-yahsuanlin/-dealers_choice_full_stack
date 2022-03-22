@@ -44,9 +44,9 @@ class CreateNewCountry extends Component {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, {history}) => {
 	return {
-		addCountry: (country) => dispatch(createCountries(country))
+		addCountry: (country) => dispatch(createCountries(country, history))
 	}
 }
 

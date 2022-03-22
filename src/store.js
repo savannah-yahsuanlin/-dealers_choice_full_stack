@@ -33,10 +33,11 @@ const setCountries = () => {
 	}
 }
 
-const createCountries = (country) => {
+const createCountries = (country, history) => {
 	return async(dispatch) => {
 		const created = (await axios.post('/api/countries', country)).data
 		dispatch({type: CREATE_COUNTRY, country}, created)
+		history.push('/countries')
 	}
 }
 
