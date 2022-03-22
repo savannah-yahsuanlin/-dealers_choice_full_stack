@@ -8,7 +8,8 @@ class CreateNewCountry extends Component {
 		this.state = {
 			name: '',
 			population: '',
-			note: ''
+			note: '',
+			president: ''
 		}
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
@@ -27,7 +28,7 @@ class CreateNewCountry extends Component {
 
 
 	render() {
-		const { name, population, note } = this.state
+		const { name, population, note, president } = this.state
 		const {  handleSubmit, handleChange } = this
 		return (
 			<div>
@@ -35,6 +36,7 @@ class CreateNewCountry extends Component {
 					<input name='name' value={name} placeholder='country name' onChange = { handleChange } />
 					<input name='population' value={population} placeholder='population' onChange={ handleChange }/>
 					<input name='note' value={note} placeholder='note' onChange={ handleChange }/>
+					<input name='president' value={president} placeholder='president' onChange={ handleChange }/>
 					{!name ||!population ? <button className='save' disabled> Save </button> : <button className='save'> Save </button>}
 				</form>
 			</div>

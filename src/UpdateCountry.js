@@ -7,9 +7,9 @@ class UpdateCountry extends Component {
 		super(props)
 console.log(this.props.country)
 		this.state = {
-			name: this.props.country.id ? this.props.country.name : '',
-			population: this.props.country.id ? this.props.country.population : '',
-			note: this.props.country.id ? this.props.country.note : ''
+			name: this.props.country ? this.props.country.name : '',
+			population: this.props.country ? this.props.country.population : '',
+			note: this.props.country ? this.props.country.note : ''
 		}
 		this.handleSubmit = this.handleSubmit.bind(this)
 		this.handleChange = this.handleChange.bind(this)
