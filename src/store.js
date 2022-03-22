@@ -86,17 +86,17 @@ const _setSingleCountry = (country) => {
 	}
 }
 
-//thunk creator for country
-const setSingleCountry = () => {
+////thunk creator for country
+const setSingleCountry = (id) => {
 	return async(dispatch) => {
-		const country = (await axios.get('/api/country')).data
-		dispatch(_setSingleCountry(country))
+		const response = (await axios.get(`/api/countries/${id}`)).data
+		dispatch(_setSingleCountry(response))
 	}
 }
 
 
-//single country reducer
-const countryReducer = (state = {}, action) => {
+////single country reducer
+const singleCountryReducer = (state = {}, action) => {
 	if(action.type === SET_SINGLE_COUNTRY) {
 		state = action.country
 	}
@@ -106,7 +106,7 @@ const countryReducer = (state = {}, action) => {
 //combine
 const reducer = combineReducers({
 	countries: countriesReducer,
-	country: countryReducer
+	singleCountry: singleCountryReducer
 })
 
 

@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const {syncAndSeed, Countries } = require('./db')
+const {syncAndSeed, Countries, President } = require('./db')
 
 app.use(express.json())
 app.use('/', express.static(path.join(__dirname, 'public')))
@@ -13,7 +13,7 @@ app.get('/', (req, res)=> res.sendFile(path.join(__dirname, 'index.html')));
 
 app.get('/api/countries', async(req, res, next) => {
 	try {
-		res.send(await Countries.findAll())
+		res.send(await Countries.findAll({ include: President }))
 	} catch (error) {
 		next(error)
 	}
@@ -57,6 +57,17 @@ app.get('/api/countries/:id', async(req, res, next) => {
 		next(error)
 	}
 })
+
+
+//presidents
+app.get('/api/presidents', async(req, res, next) => {
+	try {
+		res.send(await President.findAll())
+	} catch (error) {
+		next(error)
+	}
+})
+
 
 
 

@@ -1,9 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ruinCountry } from './store'
-import { Link } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
+import Country from './Country'
 
-const Countries = ({ countries, deleteCountry }) => {
+const Countries = ({ countries, deleteCountry}) => {
+
     return (
          <div>
             <ul className='countryList'>
@@ -11,17 +13,16 @@ const Countries = ({ countries, deleteCountry }) => {
                 countries.map(country => {
                     return (		
                         <div key={country.id}>
-                            <Link to={`/countries/${country.id}`}>
-                                <li key={country.id}>
-                                   Country: {country.name} <br/>
-                                </li>
-                            </Link>
+                            <li>
+                             <Link to={`/countries/${country.id}`}>{country.name}</Link>
+                            </li>
                             <button onClick={ () => deleteCountry(country) }>X</button>
                         </div>
                     )
                 })
             }
             </ul>
+            <Route path='/countries/:id' component={Country}/>
         </div>
     )
 }

@@ -1,20 +1,31 @@
 import React from "react";
 import { connect } from 'react-redux'
+import { Link, Route } from 'react-router-dom'
+import UpdateCountry from "./UpdateCountry";
+
 
 const Country = (props) => {
-    const country = props.countries.find(country => country.id === props.match.params.id*1)
+    const id = props.match.params.id*1
+    const selected = props.countries.find(country => country.id === id)
+
+    if(!selected) {
+        return null
+    } 
     return (
         <div>
-            <hr/>
-            <h1 key={country.id}>{country.name}</h1>
-            { country.note ? <small>Note: '{country.note}'</small> : ''}
-            <p>Population: {country.population}</p>
+            <div key={selected.id}>
+                <hr/>
+                <h1 key={selected.id}>{selected.name}</h1>
+                { selected.note ? <small>Note: {selected.note}</small> : '' }
+                <p>Population: {selected.population}</p>
+				<p>PresidentId: {selected.president.name}</p>
+            </div> 
+            <form>
+             <button type='submit'><Link to={`/countries/${id}/edit`}>Update</Link></button>
+            </form>
+            <Route path='/countries/:id/edit' component={UpdateCountry} />
         </div>
     )
 }
 
-const mapStateToProps = (state) => {
-    return state
-} 
-
-export default connect(mapStateToProps)(Country)
+export default connect(state=>state)(Country)

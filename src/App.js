@@ -5,6 +5,7 @@ import Countries from './Countries'
 import Country from './Country'
 import Nav from './Nav'
 import CreateNewCountry from './CreateNewCountry'
+import UpdateCountry from './UpdateCountry'
 import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 
 
@@ -22,10 +23,14 @@ class App extends Component {
                     <Route path='/' component={Nav}/>
                     <hr/>
                     <Switch>
-                        <Route path='/countries/create' component={CreateNewCountry}/>
+                        <Route exact path='/countries/create' component={CreateNewCountry}/>
                         <Route path='/countries' component={Countries}/>
+                        <Route path='/countries/:id' component={Country}/>
+                        <Route exact path='/countries/:id/edit' component={UpdateCountry}/>
                     </Switch>
+                   
                 </div>
+                 
             </Router>
         )
     }
